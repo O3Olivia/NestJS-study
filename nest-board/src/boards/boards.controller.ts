@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from './board.model';
 
@@ -6,8 +6,17 @@ import { Board } from './board.model';
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
-  @Get()
+  @Get('/')
   getAllBoard(): Board[] {
     return this.boardsService.getAllBoards();
+  }
+
+  @Post('/create')
+  createBoard(
+    @Body('title') title: string,
+    @Body('content') content: string,
+  ): Board {
+    // service를 보면 board 하나만 return하기 때문에 []로 하지 않아도 된다.
+    return this.boardsService.createBoard(title, content);
   }
 }

@@ -11,7 +11,7 @@ export class BoardsController {
     return this.boardsService.getAllBoards();
   }
 
-  @Post('/create')
+  @Post()
   createBoard(
     @Body('title') title: string,
     @Body('content') content: string,

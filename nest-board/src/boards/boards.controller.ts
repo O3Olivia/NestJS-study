@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board } from './board.model';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -16,5 +16,10 @@ export class BoardsController {
   createBoard(@Body() createBoardDto: CreateBoardDto): Board {
     // service를 보면 board 하나만 return하기 때문에 []로 하지 않아도 된다.
     return this.boardsService.createBoard(createBoardDto);
+  }
+
+  @Post()
+  getBoardById(@Param('id') id: string): Board {
+    return this.boardsService.getBoardById(id);
   }
 }

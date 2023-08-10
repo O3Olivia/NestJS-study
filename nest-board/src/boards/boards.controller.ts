@@ -29,7 +29,7 @@ export class BoardsController {
     return this.boardsService.createBoard(createBoardDto);
   }
 
-  @Get()
+  @Post()
   getBoardById(@Param('id') id: string): Board {
     return this.boardsService.getBoardById(id);
   }

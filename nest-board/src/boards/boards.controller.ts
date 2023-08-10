@@ -6,6 +6,8 @@ import {
   Body,
   Param,
   Patch,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board, BoardStatus } from './board.model';
@@ -21,12 +23,13 @@ export class BoardsController {
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: CreateBoardDto): Board {
     // service를 보면 board 하나만 return하기 때문에 []로 하지 않아도 된다.
     return this.boardsService.createBoard(createBoardDto);
   }
 
-  @Post()
+  @Get()
   getBoardById(@Param('id') id: string): Board {
     return this.boardsService.getBoardById(id);
   }
